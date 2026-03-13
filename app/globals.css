@@ -49,6 +49,7 @@
 
 :root {
   --background: oklch(1 0 0);
+  --nav-background: #151f2b;
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
@@ -83,7 +84,8 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: #2e2e33;
+  --nav-background: #151f2b;
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -122,8 +124,55 @@
   }
   body {
     @apply bg-background text-foreground;
+    --font-sans: var(--font-anonymous-pro), ui-monospace, monospace;
+    font-family: var(--font-sans);
   }
   html {
     @apply font-sans;
+  }
+}
+
+/* Mini-app: smooth transitions */
+@layer utilities {
+  .animate-in-fade {
+    animation: fadeIn 0.4s ease-out forwards;
+  }
+  .animate-in-fade-up {
+    animation: fadeInUp 0.4s ease-out forwards;
+  }
+  /* Мягкое появление страницы (например /buy) */
+  .animate-page-in {
+    animation: pageIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pageIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
